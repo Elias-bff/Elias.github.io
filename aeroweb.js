@@ -65,3 +65,5 @@ var aeroweb=[[
         ["Business: [Unfinished]","onclick='engine.resize("+2+");con.exec(\"https://aerophp.000webhostapp.com/query/business.html\")'"]],
     ["EXPERIMENTS",
         ["Neurons No.1: [Unfinished]","onclick='con.exec(\"https://aerophp.000webhostapp.com/experiments/neutrons no1.html\")'"]]]]
+var system={
+    "modules":["stylist.js"]}
