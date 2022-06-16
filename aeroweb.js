@@ -14,6 +14,7 @@ var aeroweb=[[
     "-Widgets coming soon",
     "/linebreak/",
     "Major updates:",
+    "+Completely recoded website with practical functionality",
     "+Added Console redirection for debug to inspect",
     "+Added Low quality mode for lower devices",
     "+Added Custom JS inspector",
@@ -28,7 +29,7 @@ var aeroweb=[[
     "+Added Cookie Clicker 2.031 (Latest version)",
     "/linebreak/",
     "Known Bugs:",
-    "Different browsers handle current Cookie storage system differently, changing to localStorage soon."],
+    "None."],
 [
     ["Cloth Sim","https://aerophp.000webhostapp.com/query/cloth.html"],
     ["Encrypted Web Proxy","https://aerophp.000webhostapp.com/proxy/index.php"],
@@ -66,4 +67,5 @@ var aeroweb=[[
     ["EXPERIMENTS",
         ["Neurons No.1: [Unfinished]","onclick='con.exec(\"https://aerophp.000webhostapp.com/experiments/neutrons no1.html\")'"]]]]
 var system={
-    "modules":["stylist.js"]}
+    "modules":[
+        "stylist.js"]}
