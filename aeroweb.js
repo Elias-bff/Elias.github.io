@@ -48,8 +48,8 @@ var aeroweb=[[
 [
     ["SYSTEMS",
         ["Operating Sub-system: [Unfinished]","onclick=engine.resize(2);con.exec('programs/os.html')"],
-        ["Settings: [Popout window]","onclick='compilers.program("+'"'+","+'""programs/settings.html"'+","+'"height:200px;width:400px;resize:both;overflow:hidden;z-index:1000"'+")'"],
-        ["Console: [JS Inspector]","onclick='compilers.program("+'"Console Inspector"'+","+'"programs/inspecter.html"'+","+'"height:300px;width:600px;resize:both;overflow:hidden;z-index:1000"'+")'"]],
+        ["Settings: [Popout window]","onclick='compilers.program('','programs/settings.html","height:200px;width:400px;resize:both;overflow:hidden;z-index:1000')'"],
+        ["Console: [JS Inspector]","onclick='compilers.program("+'"Console Inspector"'+","+'"programs/inspect.html"'+","+'"height:300px;width:600px;resize:both;overflow:hidden;z-index:1000"'+")'"]],
     ["PROJECTS",
         ["Novels: [Unfinished]",""]],
     ["PROGRAMS",
