@@ -31,9 +31,9 @@ var aeroweb=[[
     "Known Bugs:",
     "None."],
 [
-    ["Cloth Sim","https://aerophp.000webhostapp.com/query/cloth.html"],
+    ["Cloth Sim","https://aerophp.000webhostapp.com/query/cloth.html","desktop"],
     ["Encrypted Web Proxy","https://aerophp.000webhostapp.com/proxy/index.php"],
-    ["Legacy Tetris","https://aerophp.000webhostapp.com/query/tetris.html"],
+    ["Legacy Tetris","https://aerophp.000webhostapp.com/query/tetris.html","desktop"],
     ["Cookie Clicker 2.031","https://aerophp.000webhostapp.com/query/CC2031.html"],
     ["Console Emulator","https://aerophp.000webhostapp.com/query/CESTE.html"],
     ["Flex Background","https://aerophp.000webhostapp.com/query/FLPBE.html"]],
