@@ -68,4 +68,5 @@ var aeroweb=[[
         ["Neurons No.1: [Unfinished]","onclick='con.exec(\"https://aerophp.000webhostapp.com/experiments/neutrons no1.html\")'"]]]]
 var system={
     "modules":[
-        "stylist.js"]}
+        "stylist.js",
+    	"mobile.js"]}
