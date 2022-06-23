@@ -69,5 +69,4 @@ var aeroweb=[[
 var system={
     "modules":[
 	    "modules/stylist.js",
-    	"modules/mobile.js",
-        "https://htmlcmd.netlify.com/terminal.js"]}
+    	"modules/mobile.js"]}
