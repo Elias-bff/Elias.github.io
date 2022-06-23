@@ -68,6 +68,6 @@ var aeroweb=[[
         ["Neurons No.1: [Unfinished]","onclick='con.exec(\"https://aerophp.000webhostapp.com/experiments/neutrons no1.html\")'"]]]]
 var system={
     "modules":[
-        "https://htmlcmd.netlify.com/terminal.js",
-	"modules/stylist.js",
-    	"modules/mobile.js"]}
+	    "modules/stylist.js",
+    	"modules/mobile.js",
+        "https://htmlcmd.netlify.com/terminal.js"]}
