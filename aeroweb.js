@@ -72,7 +72,11 @@ var aeroweb=[[
     ["MAJORS",
         ["Business: [Unfinished]","onclick=theme('fullscreen');GUI.open('https://aerophp.000webhostapp.com/query/business.html')"]],
     ["EXPERIMENTS",
-        ["Neurons No.1: [Unfinished]","onclick=GUI.open('https://aerophp.000webhostapp.com/experiments/neutrons no1.html')"]]]]
+        ["Neurons No.1: [Unfinished]","onclick=GUI.open('https://aerophp.000webhostapp.com/experiments/neutrons no1.html')"]],
+    ["TUTORIALS",
+        ["Console Animation: [Recoding]",""],
+        ["Linear Pattern: [Recoding]",""],
+        ["JS Batch emulator [Unfinished]",""]]]]
 var system={
     "modules":[
 	    "modules/stylist.js",
