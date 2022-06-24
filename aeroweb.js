@@ -69,4 +69,5 @@ var aeroweb=[[
 var system={
     "modules":[
 	    "modules/stylist.js",
-    	"modules/mobile.js"]}
+    	"modules/mobile.js",
+        "modules/tutorial.js"]}
