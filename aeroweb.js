@@ -52,7 +52,12 @@ var aeroweb=[[
         ["Console: [JS Inspector]","onclick=compilers.program('Console Inspector','programs/inspect.html','height:300px;width:600px;resize:both;overflow:hidden;z-index:1000')"]],
     ["PROJECTS",
         ["Novels: [Unfinished]",""],
-        ["Steam Personalizer [Unfinished]","onclick=GUI.open('https://htmlcmd.netlify.com')"]],
+        ["Steam Personalizer: [Unfinished]","GUI.open('https://hacknet.netlify.com/')"],
+        ["Hacknet: [Unfinished]",""]
+        ["PAC: [Unfinished]",""],
+        ["Pluto: [Unfinished]",""],
+        ["Decentralized Motion: [Unfinished]",""],
+        ["Sequence: [Unfinished]",""]],
     ["PROGRAMS",
         ["Legacy Tetris: [alvar91]","onclick=GUI.open('https://aerophp.000webhostapp.com/query/tetris.html')"],
         ["Cookie Clicker 2.031: [Orteil.dashnet]","onclick=theme('minimal');GUI.open('https://aerophp.000webhostapp.com/query/CC2031.html')"],
@@ -60,7 +65,8 @@ var aeroweb=[[
         ["Algorithms: [Unfinished]","onclick=theme('minimal');GUI.open('https://aerophp.000webhostapp.com/query/algorithms.html')"],
         ["Encrypted Proxy: [MiniProxy]","onclick=theme('minimal');GUI.open('https://aerophp.000webhostapp.com/proxy/index.php')"],
         ["Miniframe: [Bookmark JS Tool]","onclick=GUI.program("+'"Miniframe compiled JS code"'+","+'""'+","+'"height:200px;width:300px;resize:both;overflow:hidden;z-index:1000"'+")"],
-        ["Code Editor: [Unfinished]","onclick=compilers.program("+'"Code Editor"'+","+'"programs/editor.html"'+","+'"height:270px;width:600px;resize:both;overflow:hidden;z-index:1000"'+")"]],
+        ["Code Editor: [Unfinished]","onclick=compilers.program("+'"Code Editor"'+","+'"programs/editor.html"'+","+'"height:270px;width:600px;resize:both;overflow:hidden;z-index:1000"'+")"]
+        ["HTML CMD: [50% Completed]","onclick=GUI.open('https://htmlcmd.netlify.com"]],
     ["COMPILERS",
         ["Python: [Unfinished]",""]],
     ["MAJORS",
