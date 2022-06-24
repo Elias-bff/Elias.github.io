@@ -63,7 +63,7 @@ var aeroweb=[[
     ["COMPILERS",
         ["Python: [Unfinished]",""]],
     ["MAJORS",
-        ["Business: [Unfinished]","onclick='engine.resize("+2+");GUI.open(\"https://aerophp.000webhostapp.com/query/business.html\")'"]],
+        ["Business: [Unfinished]","onclick='theme('fullscreen');GUI.open(\"https://aerophp.000webhostapp.com/query/business.html\")'"]],
     ["EXPERIMENTS",
         ["Neurons No.1: [Unfinished]","onclick='GUI.open(\"https://aerophp.000webhostapp.com/experiments/neutrons no1.html\")'"]]]]
 var system={
