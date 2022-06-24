@@ -53,7 +53,7 @@ var aeroweb=[[
     ["PROJECTS",
         ["Novels: [Unfinished]",""],
         ["Steam Personalizer: [Unfinished]","GUI.open('https://hacknet.netlify.com/')"],
-        ["Hacknet: [Unfinished]",""]
+        ["Hacknet: [Unfinished]",""],
         ["PAC: [Unfinished]",""],
         ["Pluto: [Unfinished]",""],
         ["Decentralized Motion: [Unfinished]",""],
