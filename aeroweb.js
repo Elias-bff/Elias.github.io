@@ -47,25 +47,25 @@ var aeroweb=[[
     ["Miniframe","JS Bookmark Tool","https://github.com/BartenderWinery/Miniframe/releases/download/compiled/compiled.js"]],
 [
     ["SYSTEMS",
-        ["Operating Sub-system: [Unfinished]","onclick='engine.resize(2);con.exec(\"programs/os.html\")'"],
+        ["Operating Sub-system: [Unfinished]","onclick='engine.resize(2);GUI.open(\"programs/os.html\")'"],
         ["Settings: [Popout window]","onclick='compilers.program(\"\",\"programs/settings.html\",\"height:200px;width:400px;resize:both;overflow:hidden;z-index:1000\")'"],
         ["Console: [JS Inspector]","onclick='compilers.program(\"Console Inspector\",\"programs/inspect.html\",\"height:300px;width:600px;resize:both;overflow:hidden;z-index:1000\")'"]],
     ["PROJECTS",
         ["Novels: [Unfinished]",""]],
     ["PROGRAMS",
-        ["Legacy Tetris: [alvar91]","onclick=con.exec('https://aerophp.000webhostapp.com/query/tetris.html')"],
-        ["Cookie Clicker 2.031: [Orteil.dashnet]","onclick=engine.resize(1);con.exec('https://aerophp.000webhostapp.com/query/CC2031.html')"],
+        ["Legacy Tetris: [alvar91]","onclick=GUI.open('https://aerophp.000webhostapp.com/query/tetris.html')"],
+        ["Cookie Clicker 2.031: [Orteil.dashnet]","onclick=engine.resize(1);GUI.open('https://aerophp.000webhostapp.com/query/CC2031.html')"],
         ["Neco-Arc Arcade: [Unfinished]",""],
-        ["Algorithms: [Unfinished]","onclick=engine.resize(1);con.exec('https://aerophp.000webhostapp.com/query/algorithms.html')"],
-        ["Encrypted Proxy: [MiniProxy]","onclick=engine.resize(1);con.exec('https://aerophp.000webhostapp.com/proxy/index.php')"],
+        ["Algorithms: [Unfinished]","onclick=engine.resize(1);GUI.open('https://aerophp.000webhostapp.com/query/algorithms.html')"],
+        ["Encrypted Proxy: [MiniProxy]","onclick=engine.resize(1);GUI.open('https://aerophp.000webhostapp.com/proxy/index.php')"],
         ["Miniframe: [Bookmark JS Tool]","onclick='GUI.program("+'"Miniframe compiled JS code"'+","+'""'+","+'"height:200px;width:300px;resize:both;overflow:hidden;z-index:1000"'+")'"],
         ["Code Editor: [Unfinished]","onclick='compilers.program("+'"Code Editor"'+","+'"programs/editor.html"'+","+'"height:270px;width:600px;resize:both;overflow:hidden;z-index:1000"'+")'"]],
     ["COMPILERS",
         ["Python: [Unfinished]",""]],
     ["MAJORS",
-        ["Business: [Unfinished]","onclick='engine.resize("+2+");con.exec(\"https://aerophp.000webhostapp.com/query/business.html\")'"]],
+        ["Business: [Unfinished]","onclick='engine.resize("+2+");GUI.open(\"https://aerophp.000webhostapp.com/query/business.html\")'"]],
     ["EXPERIMENTS",
-        ["Neurons No.1: [Unfinished]","onclick='con.exec(\"https://aerophp.000webhostapp.com/experiments/neutrons no1.html\")'"]]]]
+        ["Neurons No.1: [Unfinished]","onclick='GUI.open(\"https://aerophp.000webhostapp.com/experiments/neutrons no1.html\")'"]]]]
 var system={
     "modules":[
 	    "modules/stylist.js",
