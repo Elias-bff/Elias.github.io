@@ -1,6 +1,9 @@
 var interface = {
     repos:null,
     orbits:[],
+    alerts:[],
+    stack:0,
+
 
     init:function(){
         
@@ -67,7 +70,7 @@ var render = {
 window.onload = function(){
     render.aspectRatio()
 
-    http.get("https://api.github.com/users/grammyy/repos", function(git){
+    http.get("https://api.github.com/users/grammyy/repos", function(git){ //convert to relay for stripped data later
         interface.repos = git
         
         for (let i = 0; i < interface.repos.length; i++) {
@@ -81,10 +84,20 @@ window.onload = function(){
 
     http.get("https://script.google.com/macros/s/AKfycbzAjl6IyaJGFBmIliMVG9_7C_A2TXdfl9We38kzLJKzPmp93_7e-N29D55DUp_xXxl2/exec", function(alerts){
         interface.alerts = alerts
+        var stack = 0
 
         for (let i = 0; i < alerts.length; i++) {
-            notifications.children[0].insertAdjacentHTML("afterend","<div><img src=\""+alerts[i].image+"\"><p>"+alerts[i].body+"</p></div><whitespace></whitespace>")
+            if (alerts[i].image) {
+                notifications.children[1].insertAdjacentHTML("afterend","<div><img src=\""+alerts[i].image+"\"><p>"+alerts[i].body+"</p></div><whitespace></whitespace>")
+            } else {
+                notifications.children[1].insertAdjacentHTML("afterend","<div><div style=\"background-color: hsl("+stack+"deg 100 40)\">"+((i > 9) ? i + 1 : "0"+(i + 1))+"</div><p>"+alerts[i].body+"</p></div><whitespace></whitespace>")
+
+                stack += 45
+            }
         }
+    
+        alerthttp.classList = ""
+        alerthttp.innerText = "NOTIFICATIONS - "+alerts.length+" -"
     })
 }
 

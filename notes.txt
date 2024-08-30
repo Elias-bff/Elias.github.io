@@ -1,18 +1,2 @@
-tick:function() {
-    let radius = Math.max(document.body.clientWidth, document.body.clientHeight) / 2
-
-    render.context.reset()
-
-    render.context.beginPath()
-    render.context.strokeStyle = "#0f0f0f"
-    
-    for (let i = -2; i < 4; i++) {
-        render.context.arc(render.middle.x + radius + (i * 60), render.middle.y, radius, 0, 2 * Math.PI);
-    } 
-
-    render.context.strokeRect((document.body.clientWidth * 0.3) + 10, 10, (document.body.clientWidth - 20) - (document.body.clientWidth * 0.3), document.body.clientHeight - 20);
-
-    render.context.stroke()
-
-    window.requestAnimationFrame(render.tick)
-}
+//fix the notifications bar to fit all notifcations in a scroll overflow
+<p style="border-top: 0.8px solid white">ggggggggggggggggggg</p>
