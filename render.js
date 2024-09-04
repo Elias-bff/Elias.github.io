@@ -83,7 +83,7 @@ var render = {
 window.onload = function(){
     render.aspectRatio()
 
-    http.get("https://https://script.google.com/macros/s/AKfycbwYXzcV_b1Db4hyCcrFZF0PRNho3KBUXkOcEhdpLIKsYeAbj9eEMwSdoSOQgdn27V2g/exec", function(git){
+    http.get("https://script.google.com/macros/s/AKfycbwYXzcV_b1Db4hyCcrFZF0PRNho3KBUXkOcEhdpLIKsYeAbj9eEMwSdoSOQgdn27V2g/exec", function(git){
         interface.repos = git
         
         for (let i = 0; i < interface.repos.length; i++) {
