@@ -1,2 +1,2 @@
 //fix the notifications bar to fit all notifcations in a scroll overflow
-<p style="border-top: 0.8px solid white">ggggggggggggggggggg</p>
+

@@ -7,6 +7,19 @@ var interface = {
 
     init:function(){
         
+    },
+
+    alert:function(i){
+        var alert = interface.alerts[i]
+        var event = alert.onclick ? "style='cursor: pointer' onclick='"+alert.onclick+"'" : ""
+
+        if (alert.image) {
+            notifications.children[1].insertAdjacentHTML("afterend","<div "+event+"><img src='"+alert.image+"'><p>"+alert.body+"</p></div><whitespace></whitespace>")
+        } else {
+            notifications.children[1].insertAdjacentHTML("afterend","<div "+event+"><div style='background-color: hsl("+interface.stack+"deg 100 40)'>"+((i >= 9) ? i + 1 : "0"+(i + 1))+"</div><p>"+alert.body+"</p></div><whitespace></whitespace>")
+
+            interface.stack += 45
+        }
     }
 }
 
@@ -70,7 +83,7 @@ var render = {
 window.onload = function(){
     render.aspectRatio()
 
-    http.get("https://api.github.com/users/grammyy/repos", function(git){ //convert to relay for stripped data later
+    http.get("https://https://script.google.com/macros/s/AKfycbwYXzcV_b1Db4hyCcrFZF0PRNho3KBUXkOcEhdpLIKsYeAbj9eEMwSdoSOQgdn27V2g/exec", function(git){
         interface.repos = git
         
         for (let i = 0; i < interface.repos.length; i++) {
@@ -84,18 +97,19 @@ window.onload = function(){
 
     http.get("https://script.google.com/macros/s/AKfycbzAjl6IyaJGFBmIliMVG9_7C_A2TXdfl9We38kzLJKzPmp93_7e-N29D55DUp_xXxl2/exec", function(alerts){
         interface.alerts = alerts
-        var stack = 0
 
         for (let i = 0; i < alerts.length; i++) {
-            if (alerts[i].image) {
-                notifications.children[1].insertAdjacentHTML("afterend","<div><img src=\""+alerts[i].image+"\"><p>"+alerts[i].body+"</p></div><whitespace></whitespace>")
-            } else {
-                notifications.children[1].insertAdjacentHTML("afterend","<div><div style=\"background-color: hsl("+stack+"deg 100 40)\">"+((i > 9) ? i + 1 : "0"+(i + 1))+"</div><p>"+alerts[i].body+"</p></div><whitespace></whitespace>")
-
-                stack += 45
+            if (i <= 6) {
+                notifications.children[notifications.childElementCount - 2].remove()
+                notifications.children[notifications.childElementCount - 2].remove()
             }
+
+            interface.alert(i)
         }
     
+        stylesheet = document.styleSheets[0]
+        stylesheet.insertRule(".loading div { background: grey !important}", 1)
+
         alerthttp.classList = ""
         alerthttp.innerText = "NOTIFICATIONS - "+alerts.length+" -"
     })
