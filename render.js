@@ -107,8 +107,10 @@ window.onload = function(){
             interface.alert(i)
         }
     
-        stylesheet = document.styleSheets[0]
-        stylesheet.insertRule(".loading div { background: grey !important}", 1)
+        const style = document.createElement('style');
+        
+        document.head.appendChild(style);
+        style.sheet.insertRule(".loading div { background: grey !important }", 0);
 
         alerthttp.classList = ""
         alerthttp.innerText = "NOTIFICATIONS - "+alerts.length+" -"
