@@ -31,12 +31,15 @@ p span {color: white !important; margin: 0 !important; cursor: pointer}
             0.8px -0.8px 0 #000;
         letter-spacing: 1px; color: #feefdf; position: absolute; margin: 1.6%; margin-top: 20px; font-size:3.3vw; font-weight: initial; height: 14%; width: 16.8%; font-family: "Anton SC", sans-serif}
     #left h1:after {letter-spacing: 1px; color: black; position: absolute; content: "Gramweb -"; left: 0; clip-path: polygon(362px 113px, 114.74% 1px, 91.24% -0.33%, 5px 94.33%); top: 0}
+
 #main {width: 50%; background-color: #1c130e; z-index:-2; display: flex; flex-direction: column}
     #main div {width: 100%; height: 50%}
     #context {width: 100%; height: 100%; position: absolute; left: 0; border: #423936}
     #list {background-color: #1c130e; z-index: 1; display: flex; flex-direction: row}
         #list div div{height: 100%; width: 33%; margin-top: 35px}
+
 #middle {width: 15%; background-color: #024263}
+
 #right {width: 15%; background-color: #1c130e}
     #right * {margin: 15px; color: #84807d}
     #notifications {max-height: 50%; height: auto; margin: 15px; overflow: auto}
