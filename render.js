@@ -125,7 +125,7 @@ window.onload = function(){
     http.get("https://script.google.com/macros/s/AKfycbz3Hj7Xf8flvhAKpzGc8cP48uGWbIDKvgC6BRnlvLDeARMF51OB_g-Utem7Jd-YIkPC/exec", function(events){
         interface.events = events
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 6; i++) {
             interface.event(i)
         }
     })
