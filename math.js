@@ -4,3 +4,11 @@ Math.rotate = function(angle, cx, cy, x, y){
 
     return [x2, y2];
 }
+
+Math.randInt = function(min, max){
+    const ceil = Math.ceil(min)
+    const floor = Math.floor(max)
+
+    return Math.floor(Math.random() * (floor - ceil) + ceil)
+}
+  

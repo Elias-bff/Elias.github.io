@@ -20,6 +20,12 @@ var interface = {
 
             interface.stack += 45
         }
+    },
+
+    event:function(i){
+        var event = interface.events[i]
+
+        news.insertAdjacentHTML("beforeend","<div><img src='"+(event.images ? event.images[Math.randInt(event.images.length)] : "favicon.ico")+"'><h4>meow</h4><h3>"+event.name+"</h3><p></p></div>")
     }
 }
 
@@ -114,6 +120,14 @@ window.onload = function(){
 
         alerthttp.classList = ""
         alerthttp.innerText = "NOTIFICATIONS - "+alerts.length+" -"
+    })
+
+    http.get("https://script.google.com/macros/s/AKfycbz3Hj7Xf8flvhAKpzGc8cP48uGWbIDKvgC6BRnlvLDeARMF51OB_g-Utem7Jd-YIkPC/exec", function(events){
+        interface.events = events
+
+        for (let i = 0; i < 5; i++) {
+            interface.event(i)
+        }
     })
 }
 

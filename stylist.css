@@ -23,34 +23,52 @@ p span {color: white !important; margin: 0 !important; cursor: pointer}
 /* ↑ elements ↑ */
 
 #left {width: 20%; background-color: #feefdf}
+    #left * {overflow: visible; font-family: "Anton SC", sans-serif; margin: 8%}    
+    #left * * {margin: 0}
+    #left h3 {letter-spacing: 1px; width: 84%; border-top: 1px solid #84807d; border-bottom: 1px solid #84807d; height: 14px; line-height: 13px}
     #left h1 {
         text-shadow:
             0.8px 0.8px 0 #000,
             -0.8px 0.8px 0 #000,
             -0.8px -0.8px 0 #000,
             0.8px -0.8px 0 #000;
-        letter-spacing: 1px; color: #feefdf; position: absolute; margin: 1.6%; margin-top: 20px; font-size:3.3vw; font-weight: initial; height: 14%; width: 16.8%; font-family: "Anton SC", sans-serif}
-    #left h1:after {letter-spacing: 1px; color: black; position: absolute; content: "Gramweb -"; left: 0; clip-path: polygon(362px 113px, 114.74% 1px, 91.24% -0.33%, 5px 94.33%); top: 0}
+        letter-spacing: 1px; color: #feefdf; position: absolute; font-size:3.3vw; font-weight: initial}
+        #left h1:after {letter-spacing: 1px; color: black; position: absolute; content: "Gramweb -"; left: 0; clip-path: polygon(362px 500%, 114.74% 1px, 91.24% -0.33%, 5px 94.33%); top: 0}
+    #media {height: 24px; display: flex}
+        #media * {margin-right: 3px; user-select: none}
+        #media svg {cursor: pointer}
+    #news {display: flex; flex-wrap: wrap; flex-direction: column}
+        #news div {width: 50%; height: fit-content}
+            #news div img {width: 100%; filter: grayscale()}
+                #news div img:hover {filter: none}
+            #news div h4 {height: 20px; line-height: 15px}
+            #news div h3 {width: auto}
+            #news div p {line-height: 13px; font-size: 12px; margin-top: 10px; margin-bottom: 10px}
 
 #main {width: 50%; background-color: #1c130e; z-index:-2; display: flex; flex-direction: column}
     #main div {width: 100%; height: 50%}
     #context {width: 100%; height: 100%; position: absolute; left: 0; border: #423936}
     #list {background-color: #1c130e; z-index: 1; display: flex; flex-direction: row}
-        #list div div{height: 100%; width: 33%; margin-top: 35px}
+        #list div div{height: 100%; width: 33%}
+        #list div div div {width: 100%; margin-top: 35px; margin-bottom: 45px}
 
 #middle {width: 15%; background-color: #024263}
 
+@media (max-width: 950px) {
+    #right * {margin: 0 !important}
+}
+
 #right {width: 15%; background-color: #1c130e}
     #right * {margin: 15px; color: #84807d}
-    #notifications {max-height: 50%; height: auto; margin: 15px; overflow: auto}
+    #notifications {max-height: 50%; height: auto; overflow: auto}
         #notifications * {margin: 0; white-space: nowrap}
         #notifications div {width: 100%; height: 55px; display:flex}
-        #notifications div img {margin: 5px; width: 45px; border-radius: 3px; flex: none}
-        #notifications div div {margin: 5px; width: 45px; height: 45px; border-radius: 3px; flex: none; display: flex; justify-content: center; align-items: center; font-size: xx-large; color: white; pointer-events: none; user-select: none}
+        #notifications div img {margin: 5px !important; width: 45px; border-radius: 3px; flex: none}
+        #notifications div div {margin: 5px !important; width: 45px; height: 45px; border-radius: 3px; flex: none; display: flex; justify-content: center; align-items: center; font-size: xx-large; color: white; pointer-events: none; user-select: none}
         #notifications h3 {position: sticky; font-size: 10px; background-color: #302c2b; padding: 1px; padding-left: 12px; border-top: 0.8px solid #4f4c47}
         #notifications small {font-size: 11px; color: white}
         
-        #notifications div p {margin-top: 2px; margin-left: 20px; font-size: x-small; max-width: 71%; white-space: break-spaces}
+        #notifications div p {margin-top: 2px !important; margin-left: 20px !important; font-size: x-small; max-width: 71%; white-space: break-spaces}
         #notifications whitespace {display: block; background-color: #2e2a28; height: 2px; width: 100%}
 /* ↑ objects ↑ */
 
