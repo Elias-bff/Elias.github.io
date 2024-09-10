@@ -25,7 +25,7 @@ p span {color: white !important; margin: 0 !important; cursor: pointer}
 #left {width: 20%; background-color: #feefdf}
     #left * {overflow: visible; font-family: "Anton SC", sans-serif; margin: 8%}    
     #left * * {margin: 0}
-    #left h3 {letter-spacing: 1px; width: 84%; border-top: 1px solid #84807d; border-bottom: 1px solid #84807d; height: 14px; line-height: 13px}
+    #left h3 {letter-spacing: 1px; width: 84%; border-top: 1px solid #84807d; border-bottom: 1px solid #84807d; height: 15px; line-height: 16px}
     #left h1 {
         text-shadow:
             0.8px 0.8px 0 #000,
@@ -37,19 +37,20 @@ p span {color: white !important; margin: 0 !important; cursor: pointer}
     #media {height: 24px; display: flex}
         #media * {margin-right: 3px; user-select: none}
         #media svg {cursor: pointer}
-    #news {display: flex; flex-wrap: wrap; flex-direction: column}
-        #news div {width: 50%; height: fit-content}
-            #news div img {width: 100%; filter: grayscale()}
-                #news div img:hover {filter: none}
-            #news div h4 {height: 20px; line-height: 15px}
-            #news div h3 {width: auto}
-            #news div p {line-height: 13px; font-size: 12px; margin-top: 10px; margin-bottom: 10px}
+    #news {display: flex; flex-wrap: wrap; overflow: auto; overflow-x: hidden;}
+        #news div {width: 50%}
+            #news div div {width: 100%; height: fit-content; border-bottom: 1px black solid}
+                #news div img {width: 100%; filter: grayscale(); transition-delay: 0.5s; transition-duration: 1s; position: relative}
+                    #news div div img:hover {filter: none; transform: scale(1.5)}
+                #news div div h4 {height: 19px; line-height: 15px; font-size: 10px}
+                #news div div h3 {width: auto; font-size: 15px; letter-spacing: -0.8px}
+                #news div div p {line-height: 13px; font-size: 12px; margin-top: 10px; margin-bottom: 10px}
 
 #main {width: 50%; background-color: #1c130e; z-index:-2; display: flex; flex-direction: column}
     #main div {width: 100%; height: 50%}
     #context {width: 100%; height: 100%; position: absolute; left: 0; border: #423936}
-    #list {background-color: #1c130e; z-index: 1; display: flex; flex-direction: row}
-        #list div div{height: 100%; width: 33%}
+    #list {background-color: #1c130e; z-index: 1}
+        #list div div{height: 100%; width: calc(100% / 3)}
         #list div div div {width: 100%; margin-top: 35px; margin-bottom: 45px}
 
 #middle {width: 15%; background-color: #024263}

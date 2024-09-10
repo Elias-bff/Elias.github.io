@@ -23,9 +23,21 @@ var interface = {
     },
 
     event:function(i){
-        var event = interface.events[i]
+        var evt = interface.events[i]
+        var evt2 = interface.events[i + 1]
+        var tmp = [
+            "<div onclick='http.open(\"",
+            "\")'>",
+            "<h4>",
+            "</h4><h3>",
+            "</h3><p>",
+            "</p></div>"
+        ]
 
-        news.insertAdjacentHTML("beforeend","<div><img src='"+(event.images ? event.images[Math.randInt(event.images.length)] : "favicon.ico")+"'><h4>meow</h4><h3>"+event.name+"</h3><p></p></div>")
+        news.children[0].insertAdjacentHTML("beforeend",tmp[0]+evt.link+tmp[1]+((evt.images.length > 0) ? "<img src='"+decodeURI(evt.images[Math.randInt(0, evt.images.length - 1)])+"'>" : "")+tmp[2]+evt.creation+tmp[3]+evt.name+tmp[4]+evt.commit+tmp[5])
+        if (evt2){
+            news.children[1].insertAdjacentHTML("beforeend",tmp[0]+evt2.link+tmp[1]+((evt2.images.length > 0) ? "<img src='"+decodeURI(evt2.images[Math.randInt(0, evt2.images.length - 1)])+"'>" : "")+tmp[2]+evt2.creation+tmp[3]+evt2.name+tmp[4]+evt2.commit+tmp[5])
+        }
     }
 }
 
@@ -122,10 +134,10 @@ window.onload = function(){
         alerthttp.innerText = "NOTIFICATIONS - "+alerts.length+" -"
     })
 
-    http.get("https://script.google.com/macros/s/AKfycbz3Hj7Xf8flvhAKpzGc8cP48uGWbIDKvgC6BRnlvLDeARMF51OB_g-Utem7Jd-YIkPC/exec", function(events){
+    http.get("https://script.google.com/macros/s/AKfycbwKEO-Os1hQwq9yM2ejzLkHkRyFe2qEJG6kO0pmU9hO5wRkzXH5Inpum1TI4VFFg-xI/exec", function(events){
         interface.events = events
 
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < events.length; i+=2) {
             interface.event(i)
         }
     })
