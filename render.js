@@ -3,7 +3,8 @@ var interface = {
     orbits:[],
     alerts:[],
     stack:0,
-
+    offset:{x: 0, y: 0},
+    scale:1,
 
     init:function(){
         
@@ -35,8 +36,9 @@ var interface = {
         ]
 
         news.children[0].insertAdjacentHTML("beforeend",tmp[0]+evt.link+tmp[1]+((evt.images.length > 0) ? "<img src='"+decodeURI(evt.images[Math.randInt(0, evt.images.length - 1)])+"'>" : "")+tmp[2]+evt.creation+tmp[3]+evt.name+tmp[4]+evt.commit+tmp[5])
+        
         if (evt2){
-            news.children[1].insertAdjacentHTML("beforeend",tmp[0]+evt2.link+tmp[1]+((evt2.images.length > 0) ? "<img src='"+decodeURI(evt2.images[Math.randInt(0, evt2.images.length - 1)])+"'>" : "")+tmp[2]+evt2.creation+tmp[3]+evt2.name+tmp[4]+evt2.commit+tmp[5])
+            news.children[2].insertAdjacentHTML("beforeend",tmp[0]+evt2.link+tmp[1]+((evt2.images.length > 0) ? "<img src='"+decodeURI(evt2.images[Math.randInt(0, evt2.images.length - 1)])+"'>" : "")+tmp[2]+evt2.creation+tmp[3]+evt2.name+tmp[4]+evt2.commit+tmp[5])
         }
     }
 }
@@ -67,32 +69,33 @@ var render = {
         for (let i = 0; i < interface.repos.length; i++) {
             let radius = Math.min(interface.repos[i].size - (interface.repos[i].size ^ 40 - 50), 150)
             
-            render.context.fillStyle = "#1c130e"
+            render.context.fillStyle = "#1d110e"
             render.context.arc(render.middle.x + interface.orbits[i][0], render.middle.y + interface.orbits[i][1], radius + 15, 0, 2 * Math.PI);
             render.context.fill()
         }
 
         for (let i = 0; i < interface.repos.length; i++) { //make into function later, another use case
             let radius = Math.min(interface.repos[i].size - (interface.repos[i].size ^ 40 - 50), 150)
-            
+            let x = (render.middle.x + interface.orbits[i][0] + interface.offset.x) * interface.scale
+            let y = (render.middle.y + interface.orbits[i][1] + interface.offset.y) * interface.scale
+
             interface.orbits[i] = Math.rotate(0.002 - radius / 100000, 0, 0, interface.orbits[i][0], interface.orbits[i][1])
             
             let distance = Math.hypot(-interface.orbits[i][0], -interface.orbits[i][1])
             
             render.context.beginPath()
             render.context.strokeStyle = "#3e3432"
-            render.context.arc(render.middle.x + interface.orbits[i][0], render.middle.y + interface.orbits[i][1], radius, 0, 2 * Math.PI);
+            render.context.arc(x, y, radius * interface.scale, 0, 2 * Math.PI);
             render.context.stroke()
 
             render.context.beginPath()
-            render.context.arc(render.middle.x, render.middle.y, distance, 0, 2 * Math.PI);
+            render.context.arc((render.middle.x + interface.offset.x) * interface.scale, (render.middle.y + interface.offset.y) * interface.scale, distance * interface.scale, 0, 2 * Math.PI);
             render.context.stroke()
 
             render.context.fillStyle = "white"
-            render.context.fillText(Math.round(interface.orbits[i][0]) + ", " + Math.round(interface.orbits[i][1]), render.middle.x + interface.orbits[i][0], render.middle.y + interface.orbits[i][1])
-            render.context.fillText(interface.repos[i].name, render.middle.x + interface.orbits[i][0], render.middle.y + interface.orbits[i][1] + 15)
+            render.context.fillText(Math.round(interface.orbits[i][0]) + ", " + Math.round(interface.orbits[i][1]), x, y)
+            render.context.fillText(interface.repos[i].name, x, y + 15)
         }
-
 
         window.requestAnimationFrame(render.tick)
     }
@@ -141,6 +144,32 @@ window.onload = function(){
             interface.event(i)
         }
     })
+
+    http.explore("grammyy.github.io")
+    http.explore("grammyy.github.io", "packaging")
+
+    render.canvas.addEventListener('mousemove', (mouse) => {
+        if (mouse.buttons === 1) {
+            interface.offset = {
+                x: (mouse.movementX / interface.scale) + interface.offset.x,
+                y: (mouse.movementY / interface.scale) + interface.offset.y
+            }
+        }
+    })
+
+    //document.addEventListener('wheel', (mouse) => {
+    //    if (mouse.target === render.canvas) {
+    //        interface.scale = interface.scale - (mouse.deltaY / 1000)
+    //        interface.scale = Math.max(0.1, interface.scale)
+    //
+    //        interface.offset = {
+    //            x: interface.offset.x + (((solar.offsetLeft + (solar.offsetWidth / 2)) - mouse.clientX) / 3) * Math.norm(-mouse.deltaY),
+    //            y: interface.offset.y + (((solar.offsetTop + (solar.offsetHeight / 2)) - mouse.clientY) / 3) * Math.norm(-mouse.deltaY)
+    //        }
+    //    }
+    //
+    //    console.log(mouse, (solar.offsetLeft + (solar.offsetWidth / 2)), mouse.clientX)
+    //})
 }
 
 window.onresize = function(){
