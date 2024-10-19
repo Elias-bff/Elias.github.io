@@ -20,19 +20,19 @@
 /* ↑ keyframes ↑ */
 
 * {scrollbar-width: none; margin: 0; font-family: "Arial"; overflow: hidden}
-body {position: absolute; height: 100vh; width: 100vw; background-color: #1d110e; display: flex; pointer-events: none}
-body div {height: 100%}
+body {position: absolute; height: 100vh; width: 100vw; background: #1d110e; display: flex; pointer-events: none}
 body * {pointer-events: all; color: #1d110e}
 small.loading {user-select: none; animation: loading 1s infinite}
 small.loadscroll {user-select: none; animation: loading 1s infinite, loadscroll 5s infinite linear; display: block}
 .loading div {background:linear-gradient(225deg, grey, white); background-size: 400%; animation: loadanim 2s infinite}
 p span {color: white !important; margin: 0 !important; cursor: pointer}
+small.sign {align-self: center; margin: 0.9% !important; cursor: pointer; bottom: 0; position: absolute}
 /* ↑ elements ↑ */
 
-#left {width: 20%; background-color: #feefdf}
+#left {width: 20%; background: #feefdf}
     #left * {overflow: visible; font-family: "Anton SC", sans-serif; margin: 8%}    
     #left * * {margin: 0}
-    #left h3 {letter-spacing: 1px; width: 84%; border-top: 1px solid #84807d; border-bottom: 1px solid #84807d; height: 15px; line-height: 16px}
+    #left h3 {letter-spacing: 1px; width: 84%; border-top: 1px solid #84807d; border-bottom: 1px solid #84807d; height: 2vh; line-height: 2vh; font-size: 2.6vh}
     #left h1 {
         text-shadow:
             0.8px 0.8px 0 #1d110e,
@@ -44,29 +44,50 @@ p span {color: white !important; margin: 0 !important; cursor: pointer}
     #media {height: 24px; display: flex}
         #media * {margin-right: 3px; user-select: none}
         #media svg {cursor: pointer}
-    #news {display: flex; flex-wrap: wrap; overflow: auto; overflow-x: hidden;}
-        #news div {width: 47.5%}
-            #news div div {width: 100%; height: fit-content; border-bottom: 1px #1d110e solid; margin-bottom: 2px}
+    #news {display: flex; flex-wrap: wrap; overflow-y: auto; height: calc(75% - 52px)}
+        #news div {width: 47.5%; background: #feefdf; z-index: 2}
+            #news > div > div {width: 100%; height: fit-content; border-bottom: 1px #1d110e solid; margin-bottom: 2px}
+                #news div div div {width: 100px; background:linear-gradient(225deg, grey, white); background-size: 400%; animation: loadanim 2s infinite}
                 #news div img {width: 100%; filter: grayscale(); transition-delay: 0.5s; transition-duration: 1s; position: relative}
                     #news div div img:hover {filter: none}
                 #news div div h4 {height: 19px; line-height: 16px; font-size: 10px; white-space: nowrap}
                 #news div div h3 {width: auto; font-size: 14px; letter-spacing: -0.8px; font-weight: lighter}
                 #news div div p {line-height: 13px; font-size: 12px; margin-top: 10px; margin-bottom: 10px}
 
-#main {width: 50%; background-color: #1d110e; z-index:-2; display: flex; flex-direction: column}
-    #main div {width: 100%; height: 50%}
+@media (max-height: 450px) {
+    #left h3 {display: none}
+    #news {margin-top: 11vh}
+}
+
+#main {width: 50%; background: #1d110e; z-index:-2; display: flex; flex-direction: column}
+    #main > div {width: 100%; height: 50%}
     #context {width: 100%; height: 100%; position: absolute; left: 0; border: #423936}
-    #list {background-color: #1d110e; z-index: 1}
-        #list div div {height:calc(100% - 45px); margin-top: 3%}
+    #list {background: #1d110e; z-index: 1}
+        .panel {height:calc(100% - 45px) !important; margin-top: 3%; margin-left: 18px; width: 100%}
+            #list div div h1 {font-family: "Anton SC", sans-serif; height:  38px; color: white; border-bottom: 2px solid #7b7873; letter-spacing: 2px}
+            #lines {padding-left: 5px; font-size: x-small; flex: none; padding-right: 5px; border-right: 0.5px solid #4c4441; text-align: right}
+            #code {padding-left: 5px; font-size: x-small; white-space: preserve; overflow: scroll; text-wrap: nowrap}
+            #webview {padding-left: 5px}
         #list div whitespace {width: 2px; height:calc(100% - 45px); margin-top: 3%; background: #4c4441; flex-shrink: 0}
-            #explorer * {margin: 0 !important; color: #84807d}
-                #explorer div div {height: 100%}
+            #settings {display: flex}
+                #settings * {flex-shrink: 0; border-radius: 5px}
+                #settings small {color: #7b7873}
+            #explorer * {color: #84807d}
+                #explorer div div {height: 98%}
                 #explorer .view {resize: horizontal; flex-shrink: 0; width: 20%; border-right: 2px solid #4c4441; display: flex; flex-direction: column; overflow: auto}
-                    .view small {font-size: x-small; padding-left: 5px; cursor: pointer; flex-shrink: 0; white-space: nowrap}
+                    .view small {font-size: x-small; padding-left: 5px; cursor: pointer; flex-shrink: 0; white-space: nowrap; display: flex; padding: 2px}
+                        .view small:hover {background: white}
+                        .view small:hover > svg g path{color: black !important}
+                        .view small:hover > p{color: black !important}
+                        .view small svg {margin-right: 3px !important; order: unset}
+                        .view small p {user-select: none}
                     .view * {order: 2}
                     .view .dir {order: 1}
+        #webstats > div {transition-property: height; transition-duration: 0.2s}
+            #webstats div > * {transition-property: background, color; transition-duration: 0.2s}
+        #filehttp {color: white; padding-left: 2.5px; width: fit-content; white-space: nowrap; cursor: pointer; user-select: none}
 
-#middle {width: 15%; background-color: #024263}
+#middle {width: 15%; background: #024263}
 
 @media (max-width: 950px) {
     #right * {margin: 0 !important}
@@ -76,18 +97,34 @@ p span {color: white !important; margin: 0 !important; cursor: pointer}
     #right * {margin: 0 !important}
 }
 
-#right {width: 15%; background-color: #1d110e; overflow: auto}
+#right {width: 15%; background: #1d110e; overflow: auto}
     #right * {margin: 15px; color: #84807d; flex-shrink: 0}
     #notifications {max-height: 50%; height: auto; overflow: auto}
         #notifications * {margin: 0; white-space: nowrap}
         #notifications div {width: 100%; height: 55px; display:flex}
         #notifications div img {margin: 5px !important; width: 45px; border-radius: 3px; flex: none}
         #notifications div div {margin: 5px !important; width: 45px; height: 45px; border-radius: 3px; flex: none; display: flex; justify-content: center; align-items: center; font-size: xx-large; color: white; pointer-events: none; user-select: none}
-        #notifications h3 {position: sticky; font-size: 10px; background-color: #302c2b; padding: 1px; padding-left: 12px; border-top: 0.8px solid #4f4c47}
+        #notifications h3 {position: sticky; font-size: 10px; background: #302c2b; padding: 1px; padding-left: 12px; border-top: 0.8px solid #4f4c47}
         #notifications small {font-size: 11px; color: white}
         
-        #notifications div p {margin-top: 2px !important; margin-left: 20px !important; font-size: x-small; max-width: 71%; white-space: break-spaces}
-        #notifications whitespace {display: block; background-color: #2e2a28; height: 2px; width: 100%}
+        #notifications div p{margin-top: 2px !important; margin-left: 20px !important; font-size: x-small; max-width: 71%; white-space: break-spaces}
+        #notifications whitespace {display: block; background: #2e2a28; height: 2px; width: 100%}
 /* ↑ objects ↑ */
 
 .static {position: absolute; height: 100vh; width: 100vw; pointer-events: none}
+
+/*.collapse div {background: grey}
+.collapse input:checked ~ div {background:blue}*/
+.collapse {height: 20px !important; background: #221411; border: solid 1px #4c4441; margin: 1%; width: initial !important}
+    .collapse.active {height: 100px !important}
+        .collapse.active.content {display: block}
+    .collapse small {color: white; user-select: none}
+    .collapse > .content {height: 200px; display: none; position: initial !important; z-index: 2}
+    .collapse > div:not(.content) {height: 20px; border-bottom: 1px solid #4c4441; border-left: 5px solid transparent; border-right: 5px solid transparent}
+        .collapse > div:hover:not(.content) {background: white}
+            .collapse > div:hover:not(.content) small {color: black !important}
+    .collapse.content {position: absolute; width: 20px; height: 20px}
+
+.buttons {display: flex; height: auto !important}
+    .buttons > div {margin: 1%; padding: 15%; background: #221411; border: solid 1px #4c4441; width: 100%}
+    .buttons > div:hover {background: white}

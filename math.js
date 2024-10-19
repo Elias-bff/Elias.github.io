@@ -19,3 +19,11 @@ Math.norm = function(value) {
 Math.clamp = function(max, min, value) {
     return Math.min(Math.max(value, min), max)
 }
+
+Math.normVec = function(x, y) {
+    var length = Math.sqrt(x*x+y*y)
+    return {
+        x: x/length, 
+        y: y/length 
+    } 
+}

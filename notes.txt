@@ -1,2 +1,6 @@
-//fix the notifications bar to fit all notifcations in a scroll overflow
-
+color changer and theme presents
+reduced motion
+    auto focus repos
+    auto open repos
+    news open repo
+allow cookies

@@ -40,10 +40,82 @@
             </div>
             <h3>RECENT NEWS</h3>
             <div id="news">
-                <div></div>
+                <div>
+                    <div>
+                        <div style="height: 70px"></div>
+                        <h4>2024-09-28T02:03:50Z</h4>
+                        <h3>###-####</h3>
+                        <p>Update ###.##</p>
+                    </div>
+
+                    <div>
+                        <div style="height: 40px"></div>
+                        <h4>2024-09-28T02:03:50Z</h4>
+                        <h3>###-####</h3>
+                        <p>Update ###.##</p>
+                    </div>
+
+                    <div>
+                        <div style="height: 70px"></div>
+                        <h4>2024-09-28T02:03:50Z</h4>
+                        <h3>###-####</h3>
+                        <p>Update ###.##</p>
+                    </div>
+
+                    <div>
+                        <div style="height: 50px"></div>
+                        <h4>2024-09-28T02:03:50Z</h4>
+                        <h3>###-####</h3>
+                        <p>Update ###.##</p>
+                    </div>
+
+                    <div>
+                        <div style="height: 50px"></div>
+                        <h4>2024-09-28T02:03:50Z</h4>
+                        <h3>###-####</h3>
+                        <p>Update ###.##</p>
+                    </div>
+                </div>
                 <div style="width: 5%"></div>
-                <div></div>
+                <div>
+                    <div>
+                        <div style="height: 50px"></div>
+                        <h4>2024-09-28T02:03:50Z</h4>
+                        <h3>###-####</h3>
+                        <p>Update ###.##</p>
+                    </div>
+                    
+                    <div>
+                        <div style="height: 40px"></div>
+                        <h4>2024-09-28T02:03:50Z</h4>
+                        <h3>###-####</h3>
+                        <p>Update ###.##</p>
+                    </div>
+
+                    <div>
+                        <div style="height: 70px"></div>
+                        <h4>2024-09-28T02:03:50Z</h4>
+                        <h3>###-####</h3>
+                        <p>Update ###.##</p>
+                    </div>
+
+                    <div>
+                        <h4>2024-09-28T02:03:50Z</h4>
+                        <h3>###-####</h3>
+                        <p>Update ###.##</p>
+                    </div>
+
+                    <div>
+                        <div style="height: 70px"></div>
+                        <h4>2024-09-28T02:03:50Z</h4>
+                        <h3>###-####</h3>
+                        <p>Update ###.##</p>
+                    </div>
+                </div>
                 <!--<div id="console"></div>-->
+            </div>
+            <div style="display: flex;flex-direction: column">
+                <small class="sign">@Gramweb</small>
             </div>
         </div>
         <div id="main">
@@ -53,20 +125,51 @@
             
             <div id="list">
                 <div style="height: 100%; border-top: 2px solid #4c4441; margin-left: 15px; margin-right: 15px; display: flex; width: auto">
-                    <div style="flex-shrink: 2">
-                        <!--special repo files, such as embedded lists and etc-->
-                        <!--diagram graphical view of some kind, like showing functions-->
+                    <div class="panel" id="webstats" style="flex-shrink: 2; padding-right: 18px; overflow: scroll">
+                        <!--settings-->
+                        <div class="buttons">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div class="buttons">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+
+                        <div class="collapse active">
+                            <div onclick="this.parentElement.classList.toggle('active')">
+                                <small>Colors</small>
+                            </div>
+                            <div class="content">
+                            </div>
+                        </div>
+
+                        <div class="collapse">
+                            <div onclick="this.parentElement.classList.toggle('active')">
+                                <small>Themes</small>
+                            </div>
+                            <div class="content">
+                            </div>
+                        </div>
                     </div>
                     <whitespace></whitespace>
-                    <div id="explorer">
+                    <div class="panel" id="explorer">
                         <!--repo file explorer/editor-->
-                        <div style="height: 7%">
-                            <small id="filehttp" class="loadscroll" style="color: white; padding-left: 2.5px; width: fit-content; white-space: nowrap; cursor: pointer">LOADING LOADING LOADING LOADING LOADING LOADING LOADING LOADING LOADING LOADING LOADING LOADING LOADING LOADING LOADING LOADING LOADING</small>
+                        
+                        <h1>FILE EXPLORER</h1>
+                        <div style="height: 20px">
+                            <small id="filehttp" class="loadscroll">LOADING LOADING LOADING LOADING LOADING LOADING LOADING LOADING LOADING LOADING LOADING LOADING LOADING LOADING LOADING LOADING LOADING</small>
                         </div>
-                        <div style="height: 93%; display: flex">
+                        <div style="height: 81%; display: flex">
                             <div class="view" id="files"></div>
                             <div class="view" id="dirs"></div>
-                            <div></div>
+                            <div style="display: flex">
+                                <p id="lines"></p>
+                                <p id="code" onscroll="lines.scrollTop = code.scrollTop"></p>
+                            </div>
+                            <img id="webview">
                         </div>
                     </div>
                 </div>
@@ -92,10 +195,10 @@
             </div>
             
             <img style="width: 50%; margin: 0; margin-left: 3.3vw !important; border: 1px solid; padding: 3px" src="./packaging/goat.png">
-            <p style="border-bottom: 0.8px solid #7b7873; padding-bottom: 4px; font-size: x-small; white-space: preserve-breaks; user-select: none"><span>Gramweb</span> is a personal website of <span>Grammy</span>. A <span>17 year-old</span> American programmer, artist, and designer from Georgia. This site comprases of some of <span>Grammy's</span> personal works hosted on my <span>Github</span>.
+            <p style="border-bottom: 0.8px solid #7b7873; padding-bottom: 4px; font-size: x-small; white-space: preserve-breaks; user-select: none; z-index: 2; background: #1d110e"><span>Gramweb</span> is a personal website of <span>Grammy</span>. A <span>17 year-old</span> American programmer, artist, and designer from Georgia. This site comprases of some of <span>Grammy's</span> personal works hosted on my <span>Github</span>.
                 
             For contact or Inquiries; <span>please click here.</span></p>
-            <small id="sign" style="text-align: center; align-self: center; width: 100%; margin: 0; cursor: pointer">@Gramweb</small>
+            <small class="sign">@Gramweb</small>
         </div>
 
         <canvas id="overlay" class="static"></canvas>
