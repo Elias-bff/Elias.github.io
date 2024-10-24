@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baskervville+SC&family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&display=swap');
 /* ↑ imports ↑ */
 
 @keyframes loading {
@@ -50,9 +51,9 @@ small.sign {align-self: center; margin: 0.9% !important; cursor: pointer; bottom
                 #news div div div {width: 100px; background:linear-gradient(225deg, grey, white); background-size: 400%; animation: loadanim 2s infinite}
                 #news div img {width: 100%; filter: grayscale(); transition-delay: 0.5s; transition-duration: 1s; position: relative}
                     #news div div img:hover {filter: none}
-                #news div div h4 {height: 19px; line-height: 16px; font-size: 10px; white-space: nowrap}
+                #news div div h4 {height: 19px; line-height: 16px; font-size: 10px; white-space: nowrap; font-weight: lighter}
                 #news div div h3 {width: auto; font-size: 14px; letter-spacing: -0.8px; font-weight: lighter}
-                #news div div p {line-height: 13px; font-size: 12px; margin-top: 10px; margin-bottom: 10px}
+                #news div div p {line-height: 7px; font-size: 10px; margin-top: 10px; margin-bottom: 10px; font-family: "Bona Nova SC", serif; font-weight: bold}
 
 @media (max-height: 450px) {
     #left h3 {display: none}
@@ -88,6 +89,10 @@ small.sign {align-self: center; margin: 0.9% !important; cursor: pointer; bottom
         #filehttp {color: white; padding-left: 2.5px; width: fit-content; white-space: nowrap; cursor: pointer; user-select: none}
 
 #middle {width: 15%; background: #024263}
+    #middle * {color: white; margin-left: 8%}
+    #middle h2 {margin-top: 8%; font-size: 2vw; text-transform: uppercase; letter-spacing: -1px; border-bottom: 1px solid #84807d; margin-right: 32%}
+    #middle p {font-family: "Bona Nova SC", serif; font-weight: bold; font-size: 10px; height: 12px; letter-spacing: 1px}
+    #middle canvas {aspect-ratio: 1; margin: 8%; width: 84%}
 
 @media (max-width: 950px) {
     #right * {margin: 0 !important}

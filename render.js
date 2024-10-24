@@ -1,4 +1,4 @@
-const exts = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg', 'tiff', "ico"]
+const exts = ["jpg", "jpeg", "png", "gif", "bmp", "webp", "svg", "tiff", "ico"]
 // ↑ supported image types for file explorer ↑ //
 
 var interface = {
@@ -20,7 +20,7 @@ var interface = {
     // ↑ templates ↑ //
 
     zoom:function(mouse) {
-        if (mouse.target === render.canvas) {
+        if (mouse.target === render.canvases.main) {
             interface.scale = interface.scale - (interface.scale * mouse.deltaY / 1000)
             interface.scale = Math.max(0.001, interface.scale)
         }
@@ -29,13 +29,46 @@ var interface = {
             x: interface.offset.x + (Math.norm(mouse.deltaY) * (-interface.offset.x / 9.8)),
             y: interface.offset.y + (Math.norm(mouse.deltaY) * (-interface.offset.y / 9.8))
         }
+
+        if (!interface.focus && interface.scale >= 0.5) { //todo: make this a option
+            render.closestSun(sun => {
+                interface.focus = sun
+            }, 250)
+        }
+    },
+
+    randFocus:function() {
+        var suns = Object.keys(interface.systems)
+        var sun = suns[Math.floor(Math.random() * suns.length)]
+        
+        interface.focus = interface.systems[sun]
+    },
+
+    click:function(e) {
+        Object.keys(interface.systems).forEach(sunKey => {
+            const system = interface.systems[sunKey]
+            const planets = system.planets
+    
+            planets.forEach(planet => {
+                const planetX = render.middle.x + planet.x * interface.scale + interface.offset.x + system.x * interface.scale
+                const planetY = render.middle.y + planet.y * interface.scale + interface.offset.y + system.y * interface.scale
+                const planetRadius = (planet.size / 2) * interface.scale
+                // ↑ calculate radius based on scale ↑
+    
+                if (Math.hypot(e.x - planetX, e.y - planetY) <= planetRadius) {
+                    interface.focus = planet
+                }
+            })
+        })
+
+        //todo: add system clicking
     },
 
     assemble:function(repos) {
         var minPlanetSize = 50
     
         repos.forEach(repo => {
-            var language = repo.language || 'Other'
+            var language = repo.language || "Other"
             var size =  Math.min(repo.size - (repo.size ^ 40 - 50), 150)
     
             if (!interface.systems[language]) {
@@ -117,37 +150,86 @@ var interface = {
         if (evt2){
             news.children[2].insertAdjacentHTML("beforeend",tmp[0] + evt2.link + tmp[1] + ((evt2.images.length > 0) ? "<img src='" + decodeURI(evt2.images[Math.randInt(0, evt2.images.length - 1)]) + "'>" : "") + tmp[2] + evt2.creation + tmp[3] + evt2.name + tmp[4] + evt2.commit + tmp[5])
         }
+    },
+
+    find:function(body, func, findDist = Infinity, x = 0, y = 0) {
+        let result = null;
+        
+        Object.keys(body).forEach(obj => {
+            let system = body[obj];
+            
+            let dx = system.x * interface.scale + interface.offset.x + x;
+            let dy = system.y * interface.scale + interface.offset.y + y;
+            let distance = Math.hypot(dx, dy);
+            // ↑ get distance from each object to interface.offset ↑
+    
+            if (distance < findDist) {
+                findDist = distance
+                result = system
+            }
+        });
+    
+        func(result)
     }
 }
 
 var render = {
-    canvas:document.getElementById('context'),
-    context:document.getElementById('context').getContext('2d'),
-    scale:[1980, 1080],
+    canvases: {
+        main: document.getElementById("context"),
+        info: document.getElementById("info")
+    },
+
+    context: {
+        main: document.getElementById("context").getContext("2d"),
+        info: document.getElementById("info").getContext("2d")
+    },
+
+    scale: [1980, 1080],
 
     // ↑ variables ↑ //
 
-    foreach:function(func) {
+    forRepo:function(func) {
         for (let i = 0; i < interface.repos.length; i++) {
             func(interface.repos[i], i)
-        }        
+        }
+    },
+
+    closestSun:function(func, findDist = Infinity, x = 0, y = 0) {
+        interface.find(interface.systems, func, findDist, x, y);
+    },
+    
+    closestPlanet:function(func, findDist = Infinity, x = 0, y = 0) {
+        render.closestSun(system => {
+            if (system && system.planets) {
+                interface.find(system.planets, func, findDist, x, y);
+            }
+        }, findDist, x, y);
     },
 
     aspectRatio:function() {
         render.middle = {
             x: solar.offsetLeft + solar.offsetWidth / 2,
-            y: solar.offsetTop + solar.offsetHeight / 2
+            y: solar.offsetTop + solar.offsetHeight / 2,
+            // ↑ main context center ↑
+
+            info: {
+                x: info.offsetWidth / 2,
+                y: info.offsetHeight / 2
+            }
         }
 
-        render.canvas.height = document.body.clientHeight
-        render.canvas.width = document.body.clientWidth
+        render.canvases.main.width = document.body.clientWidth
+        render.canvases.main.height = document.body.clientHeight
+        
+        render.canvases.info.width = info.offsetWidth
+        render.canvases.info.height = info.offsetHeight
     },
 
     tick:function() {
-        render.context.reset()
+        render.context.main.reset()
 
-        render.context.font = "15px Georgia";
-        render.context.textAlign = "center"
+        render.context.main.font = "15px Georgia";
+        render.context.main.textAlign = "center"
 
         if (interface.focus) {
             var x, y
@@ -162,26 +244,8 @@ var render = {
     
             interface.offset.x += (x - interface.offset.x) * 0.08
             interface.offset.y += (y - interface.offset.y) * 0.08
-        } else { //todo: make this a option
-            if (interface.scale >= 0.5) {
-                let shortestDistance = 250
-
-                Object.keys(interface.systems).forEach(sun => {
-                    const system = interface.systems[sun]
-
-                    const dx = system.x * interface.scale + interface.offset.x
-                    const dy = system.y * interface.scale + interface.offset.y
-                    const distance = Math.hypot(dx, dy)
-                    // ↑ get distance from each sun to interface.offset ↑
-
-                    if (distance < shortestDistance) {
-                        shortestDistance = distance
-                        interface.focus = system
-                    }
-                })
-            }
         }
-
+        
         Object.keys(interface.systems).forEach(sun => {
             var planets = interface.systems[sun].planets
             var xy = Math.rotate(0.0001, 0, 0, interface.systems[sun].x, interface.systems[sun].y)
@@ -193,15 +257,15 @@ var render = {
             
             var dist = Math.hypot(-interface.systems[sun].x, -interface.systems[sun].y)
 
-            render.context.beginPath()
-            render.context.strokeStyle = "#3e3432"
-            render.context.arc((render.middle.x + interface.offset.x), (render.middle.y + interface.offset.y), dist * interface.scale, 0, 2 * Math.PI);
-            render.context.stroke()
+            render.context.main.beginPath()
+            render.context.main.strokeStyle = "#3e3432"
+            render.context.main.arc((render.middle.x + interface.offset.x), (render.middle.y + interface.offset.y), dist * interface.scale, 0, 2 * Math.PI);
+            render.context.main.stroke()
 
-            render.context.fillStyle = "white"
-            render.context.font = "15px serif"
-            render.context.textAlign = "left"
-            render.context.fillText(sun, x + 220 * interface.scale, y + 5)
+            render.context.main.fillStyle = "white"
+            render.context.main.font = "15px serif"
+            render.context.main.textAlign = "left"
+            render.context.main.fillText(sun, x + 220 * interface.scale, y + 5)
 
             planets.forEach(planet => {
                 var xy2 = Math.rotate(0.002 - planet.size / 100000, 0, 0, planet.x, planet.y)
@@ -213,23 +277,31 @@ var render = {
                 
                 var dist = Math.hypot(-planet.x, -planet.y)
                 
-                render.context.beginPath()
-                render.context.strokeStyle = "#3e3432"
-                render.context.arc((render.middle.x + interface.offset.x + interface.systems[sun].x * interface.scale), (render.middle.y + interface.offset.y + interface.systems[sun].y * interface.scale), dist * interface.scale, 0, 2 * Math.PI);
-                render.context.stroke()
+                render.context.main.beginPath()
+                render.context.main.strokeStyle = "#3e3432"
+                render.context.main.arc((render.middle.x + interface.offset.x + interface.systems[sun].x * interface.scale), (render.middle.y + interface.offset.y + interface.systems[sun].y * interface.scale), dist * interface.scale, 0, 2 * Math.PI);
+                render.context.main.stroke()
 
-                render.context.beginPath()
-                render.context.arc(x, y, (planet.size / 2) * interface.scale, 0, 2 * Math.PI);
-                render.context.stroke()
+                render.context.main.beginPath()
+                render.context.main.arc(x, y, (planet.size / 2) * interface.scale, 0, 2 * Math.PI);
+                render.context.main.stroke()
 
                 if (interface.scale > 0.2) {
-                    render.context.fillStyle = "white"
-                    render.context.font = 15 * interface.scale + "px serif"
-                    render.context.textAlign = "center"
-                    render.context.fillText(planet.name, x, y + 4)
+                    render.context.main.fillStyle = "white"
+                    render.context.main.font = 15 * interface.scale + "px serif"
+                    render.context.main.textAlign = "center"
+                    render.context.main.fillText(planet.name, x, y + 4)
                 }
             })
         })
+
+        render.context.info.reset()
+
+        render.context.info.beginPath()
+        render.context.info.fillStyle = "white"
+        render.context.info.arc(render.middle.info.x, render.middle.info.y, render.middle.info.x / 1.5, 0 , 2 * Math.PI)
+        render.context.info.fill()
+
 
         window.requestAnimationFrame(render.tick)
     }
@@ -243,11 +315,7 @@ window.onload = function() {
         
         interface.assemble(git)
         
-        var suns = Object.keys(interface.systems)
-        var sun = suns[Math.floor(Math.random() * suns.length)]
-        
-        interface.focus = interface.systems[sun]
-        // ↑ todo: make auto-focus when zooming in on solar systems ↑
+        interface.randFocus()
 
         render.tick()
     })
@@ -256,7 +324,7 @@ window.onload = function() {
         interface.alerts = alerts
 
         for (let i = 0; i < alerts.length; i++) {
-            if (i <= 6) {
+            if (i <= 5) {
                 notifications.children[notifications.childElementCount - 2].remove()
                 notifications.children[notifications.childElementCount - 2].remove()
             }
@@ -264,7 +332,7 @@ window.onload = function() {
             interface.alert(i)
         }
     
-        var style = document.createElement('style');
+        var style = document.createElement("style");
         
         document.head.appendChild(style);
         style.sheet.insertRule(".loading div { background: grey !important }", 0);
@@ -286,7 +354,7 @@ window.onload = function() {
     http.explore("grammyy.github.io")
     http.explore("grammyy.github.io", "packaging")
 
-    render.canvas.addEventListener('mousemove', (mouse) => {
+    render.canvases.main.addEventListener("mousemove", (mouse) => {
         if (mouse.buttons === 1) {
             interface.offset = {
                 x: mouse.movementX + interface.offset.x,
@@ -298,6 +366,8 @@ window.onload = function() {
             }
         }
     })
+
+    solar.onclick = interface.click
 
     solar.onmouseenter = function() {
         document.addEventListener("wheel", interface.zoom)
