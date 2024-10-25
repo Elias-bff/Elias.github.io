@@ -27,7 +27,7 @@ small.loading {user-select: none; animation: loading 1s infinite}
 small.loadscroll {user-select: none; animation: loading 1s infinite, loadscroll 5s infinite linear; display: block}
 .loading div {background:linear-gradient(225deg, grey, white); background-size: 400%; animation: loadanim 2s infinite}
 p span {color: white !important; margin: 0 !important; cursor: pointer}
-small.sign {align-self: center; margin: 0.9% !important; cursor: pointer; bottom: 0; position: absolute}
+small.sign {align-self: center; margin: 1.5vh !important; cursor: pointer; bottom: 0; position: absolute}
 /* ↑ elements ↑ */
 
 #left {width: 20%; background: #feefdf}

@@ -1,8 +1,8 @@
 Math.rotate = function(angle, cx, cy, x, y) {
-    let x2 = Math.cos(angle) * (x - cx) - Math.sin(angle) * (y - cy) + cx;
-    let y2 = Math.sin(angle) * (x - cx) + Math.cos(angle) * (y - cy) + cy;
+    let x2 = Math.cos(angle) * (x - cx) - Math.sin(angle) * (y - cy) + cx
+    let y2 = Math.sin(angle) * (x - cx) + Math.cos(angle) * (y - cy) + cy
 
-    return [x2, y2];
+    return [x2, y2]
 }
 
 Math.randInt = function(min, max) {
@@ -13,7 +13,7 @@ Math.randInt = function(min, max) {
 }
   
 Math.norm = function(value) {
-    return value >= 0 ? 1 : -1;
+    return value >= 0 ? 1 : -1
 }
 
 Math.clamp = function(max, min, value) {

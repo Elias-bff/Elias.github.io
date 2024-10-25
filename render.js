@@ -9,12 +9,13 @@ var interface = {
     stack: 0,
     offset: {x: 0, y: 0},
     scale: 1,
+    rotate: 0,
     focus: null,
     
     // ↑ variables ↑ //
 
     svgs:{
-        folder:"<svg viewBox='0 0 450 450' width='10' height='10'><g transform='translate(0, 0)'><path stroke='currentcolor' fill='currentcolor' d='M490.667,74.667H205.184L189.76,43.797C186.133,36.565,178.752,32,170.667,32H21.333C9.536,32,0,41.536,0,53.333v405.333 C0,470.464,9.536,480,21.333,480h469.333c11.797,0,21.333-9.536,21.333-21.333V181.333V96 C512,84.203,502.464,74.667,490.667,74.667z M469.333,160H247.851l-21.333-42.667h242.816V160z'/></path></g></svg>"
+        folder: "<svg viewBox='0 0 450 450' width='10' height='10'><g transform='translate(0, 0)'><path stroke='currentcolor' fill='currentcolor' d='M490.667,74.667H205.184L189.76,43.797C186.133,36.565,178.752,32,170.667,32H21.333C9.536,32,0,41.536,0,53.333v405.333 C0,470.464,9.536,480,21.333,480h469.333c11.797,0,21.333-9.536,21.333-21.333V181.333V96 C512,84.203,502.464,74.667,490.667,74.667z M469.333,160H247.851l-21.333-42.667h242.816V160z'/></path></g></svg>"
     },
 
     // ↑ templates ↑ //
@@ -167,7 +168,7 @@ var interface = {
                 findDist = distance
                 result = system
             }
-        });
+        })
     
         func(result)
     }
@@ -225,6 +226,24 @@ var render = {
         render.canvases.info.height = info.offsetHeight
     },
 
+    arc:function(x, y, radius, startAngle, endAngle, fill = false, pie = false, context = render.context.main) {
+        context.beginPath()
+        
+        if (pie) {
+            context.moveTo(x, y)
+            context.arc(x, y, radius, startAngle, endAngle)
+            context.moveTo(x, y)
+        } else {
+            context.arc(x, y, radius, startAngle, endAngle)
+        }
+
+        if (fill) {
+            context.fill()
+        } else {
+            context.stroke()
+        }
+    },
+
     tick:function() {
         render.context.main.reset()
 
@@ -242,8 +261,8 @@ var render = {
                 y = -(interface.focus.y) * interface.scale
             }
     
-            interface.offset.x += (x - interface.offset.x) * 0.08
-            interface.offset.y += (y - interface.offset.y) * 0.08
+            interface.offset.x += Math.round((x - interface.offset.x) * 0.08)
+            interface.offset.y += Math.round((y - interface.offset.y) * 0.08)
         }
         
         Object.keys(interface.systems).forEach(sun => {
@@ -257,10 +276,8 @@ var render = {
             
             var dist = Math.hypot(-interface.systems[sun].x, -interface.systems[sun].y)
 
-            render.context.main.beginPath()
             render.context.main.strokeStyle = "#3e3432"
-            render.context.main.arc((render.middle.x + interface.offset.x), (render.middle.y + interface.offset.y), dist * interface.scale, 0, 2 * Math.PI);
-            render.context.main.stroke()
+            render.arc((render.middle.x + interface.offset.x), (render.middle.y + interface.offset.y), dist * interface.scale, 0, 2 * Math.PI);
 
             render.context.main.fillStyle = "white"
             render.context.main.font = "15px serif"
@@ -268,23 +285,19 @@ var render = {
             render.context.main.fillText(sun, x + 220 * interface.scale, y + 5)
 
             planets.forEach(planet => {
-                var xy2 = Math.rotate(0.002 - planet.size / 100000, 0, 0, planet.x, planet.y)
+                var xy = Math.rotate(0.002 - planet.size / 100000, 0, 0, planet.x, planet.y)
                 var x = (render.middle.x + planet.x * interface.scale + interface.offset.x + interface.systems[sun].x * interface.scale)
                 var y = (render.middle.y + planet.y * interface.scale + interface.offset.y + interface.systems[sun].y * interface.scale)
                 
-                planet.x = xy2[0]
-                planet.y = xy2[1]
+                planet.x = xy[0]
+                planet.y = xy[1]
                 
                 var dist = Math.hypot(-planet.x, -planet.y)
                 
-                render.context.main.beginPath()
                 render.context.main.strokeStyle = "#3e3432"
-                render.context.main.arc((render.middle.x + interface.offset.x + interface.systems[sun].x * interface.scale), (render.middle.y + interface.offset.y + interface.systems[sun].y * interface.scale), dist * interface.scale, 0, 2 * Math.PI);
-                render.context.main.stroke()
 
-                render.context.main.beginPath()
-                render.context.main.arc(x, y, (planet.size / 2) * interface.scale, 0, 2 * Math.PI);
-                render.context.main.stroke()
+                render.arc((render.middle.x + interface.offset.x + interface.systems[sun].x * interface.scale), (render.middle.y + interface.offset.y + interface.systems[sun].y * interface.scale), dist * interface.scale, 0, 2 * Math.PI);
+                render.arc(x, y, (planet.size / 2) * interface.scale, 0, 2 * Math.PI);
 
                 if (interface.scale > 0.2) {
                     render.context.main.fillStyle = "white"
@@ -295,13 +308,16 @@ var render = {
             })
         })
 
+        interface.rotate += 0.0007
+
         render.context.info.reset()
 
-        render.context.info.beginPath()
-        render.context.info.fillStyle = "white"
-        render.context.info.arc(render.middle.info.x, render.middle.info.y, render.middle.info.x / 1.5, 0 , 2 * Math.PI)
-        render.context.info.fill()
+        render.context.info.fillStyle = "#ffffff40"
+        render.arc(render.middle.info.x, render.middle.info.y, render.middle.info.x / 1.3, interface.rotate, interface.rotate + Math.PI / 2, true, true, render.context.info)
+        render.arc(render.middle.info.x, render.middle.info.y, render.middle.info.x / 1.3, interface.rotate + Math.PI, interface.rotate + (3 * Math.PI) / 2, true, true, render.context.info)
 
+        render.context.info.fillStyle = "white"
+        render.arc(render.middle.info.x, render.middle.info.y, render.middle.info.x / 1.5, 0 , 2 * Math.PI, true, false, render.context.info)
 
         window.requestAnimationFrame(render.tick)
     }
