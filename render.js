@@ -102,18 +102,16 @@ var interface = {
             var system = interface.systems[language]
     
             system.moons.forEach(moon => {
-                var randomPlanetIndex = Math.floor(Math.random() * system.planets.length)
-                var randomPlanet = system.planets[randomPlanetIndex]
-    
-                if (!randomPlanet.moons) {
-                    randomPlanet.moons = []
+                var ranIndex = Math.floor(Math.random() * system.planets.length)
+                var ranPlanet = system.planets[ranIndex]
+                
+                if (!ranPlanet.moons) {
+                    ranPlanet.moons = []
                 }
-    
-                randomPlanet.moons.push({
-                    name: moon.name,
-                    size: moon.size,
-                    orbitDistance: Math.random() * 50 + 10
-                })
+                
+                moon.x = Math.randInt(-200, 200)
+                moon.y = Math.randInt(-200, 200)
+                moon.planet = ranPlanet
             })
         })
     },
@@ -184,11 +182,13 @@ var interface = {
 var render = {
     canvases: {
         main: document.getElementById("context"),
+        overlay: document.getElementById("overlay"),
         info: document.getElementById("info")
     },
 
     context: {
         main: document.getElementById("context").getContext("2d"),
+        overlay: document.getElementById("overlay").getContext("2d"),
         info: document.getElementById("info").getContext("2d")
     },
 
@@ -228,6 +228,9 @@ var render = {
 
         render.canvases.main.width = document.body.clientWidth
         render.canvases.main.height = document.body.clientHeight
+
+        render.canvases.overlay.width = document.body.clientWidth
+        render.canvases.overlay.height = document.body.clientHeight
         
         render.canvases.info.width = info.offsetWidth
         render.canvases.info.height = info.offsetHeight
@@ -253,6 +256,7 @@ var render = {
 
     tick:function() {
         render.context.main.reset()
+        render.context.overlay.reset()
 
         render.context.main.font = "15px Georgia";
         render.context.main.textAlign = "center"
@@ -274,6 +278,7 @@ var render = {
         
         Object.keys(interface.systems).forEach(sun => {
             var planets = interface.systems[sun].planets
+            var moons = interface.systems[sun].moons
             var xy = Math.rotate(0.0001, 0, 0, interface.systems[sun].x, interface.systems[sun].y)
             var x = (render.middle.x + interface.systems[sun].x * interface.scale + interface.offset.x)
             var y = (render.middle.y + interface.systems[sun].y * interface.scale + interface.offset.y)
@@ -311,6 +316,29 @@ var render = {
                     render.context.main.font = 15 * interface.scale + "px serif"
                     render.context.main.textAlign = "center"
                     render.context.main.fillText(planet.name, x, y + 4)
+                }
+            })
+
+            moons.forEach(moon => {
+                var xy = Math.rotate(0.002 - moon.size / 100000, 0, 0, moon.x, moon.y)
+                var x = (render.middle.x + moon.x * interface.scale + interface.offset.x + interface.systems[sun].x * interface.scale + moon.planet.x * interface.scale)
+                var y = (render.middle.y + moon.y * interface.scale + interface.offset.y + interface.systems[sun].y * interface.scale + moon.planet.y * interface.scale)
+                
+                moon.x = xy[0]
+                moon.y = xy[1]
+                
+                var dist = Math.hypot(-moon.x, -moon.y)
+                
+                render.context.overlay.strokeStyle = "#3e3432"
+
+                //render.arc((render.middle.x + interface.offset.x + interface.systems[sun].x * interface.scale + moon.planet.x * interface.scale), (render.middle.y + interface.offset.y + interface.systems[sun].y * interface.scale + moon.planet.y * interface.scale), dist * interface.scale, 0, 2 * Math.PI)
+                render.arc(x, y, (moon.size / 2) * interface.scale, 0, 2 * Math.PI, false, false, render.context.overlay)
+
+                if (interface.scale > 0.15) {
+                    render.context.overlay.fillStyle = "white"
+                    render.context.overlay.font = 5 * interface.scale + "px serif"
+                    render.context.overlay.textAlign = "center"
+                    render.context.overlay.fillText(moon.name, x, y + 4)
                 }
             })
         })

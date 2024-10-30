@@ -23,11 +23,14 @@
 @media (orientation:portrait) {
     #left {width: 30% !important; height: 72% !important}
         #left h1 {font-size: 5.55vw !important}
+        #news {flex-direction: column}
+            #news div {width: 100% !important}
     #main {width: 70% !important}
         #solar {height: 100% !important}
         #list {display: none !important}
     #middle {   bottom: 0; position: absolute; height: 33% !important; width: 30% !important}
     #right {display: none !important}
+    #overlay {clip-path: polygon(28% 0, 100% 0, 100% 100%, 28% 100%) !important}
 }
 
 @media (max-height: 450px) {
@@ -72,7 +75,7 @@ small.sign {align-self: center; margin: 1.5vh !important; cursor: pointer; botto
     #media {height: 24px; display: flex}
         #media * {margin-right: 3px; user-select: none}
         #media svg {cursor: pointer}
-    #news {display: flex; flex-wrap: wrap; overflow-y: auto; height: calc(75% - 52px)}
+    #news {display: flex; overflow-y: auto; height: calc(75% - 52px)}
         #news div {width: 47.5%; background: #feefdf; z-index: 2}
             #news > div > div {width: 100%; height: fit-content; border-bottom: 1px #1d110e solid; margin-bottom: 2px}
                 #news div div div {width: 100px; background:linear-gradient(225deg, grey, white); background-size: 400%; animation: loadanim 2s infinite}
@@ -138,6 +141,8 @@ small.sign {align-self: center; margin: 1.5vh !important; cursor: pointer; botto
         
         #notifications div p{margin-top: 5px !important; margin-left: 20px !important; font-size: x-small; max-width: 71%; white-space: break-spaces}
         #notifications whitespace {display: block; background: #2e2a28; height: 2px; width: 100%}
+
+#overlay {content: ""; clip-path: polygon(19% 0, 71% 0, 71% 53%, 19% 52%)}
 /* ↑ objects ↑ */
 
 .static {position: absolute; height: 100vh; width: 100vw; pointer-events: none}
