@@ -20,6 +20,33 @@
 }
 /* ↑ keyframes ↑ */
 
+@media (orientation:portrait) {
+    #left {width: 30% !important; height: 72% !important}
+        #left h1 {font-size: 5.55vw !important}
+    #main {width: 70% !important}
+        #solar {height: 100% !important}
+        #list {display: none !important}
+    #middle {   bottom: 0; position: absolute; height: 33% !important; width: 30% !important}
+    #right {display: none !important}
+}
+
+@media (max-height: 450px) {
+    #left h3 {display: none}
+        #news {margin-top: 11vh}
+
+    #solar {height: 100% !important}
+    #list {display: none !important}
+}
+
+@media (max-width: 950px) {
+    #right * {margin: 0 !important}
+}
+
+@media (max-width: 950px) {
+    #right * {margin: 0 !important}
+}
+/* ↑ dyanmic media ↑ */
+
 * {scrollbar-width: none; margin: 0; font-family: "Arial"; overflow: hidden}
 body {position: absolute; height: 100vh; width: 100vw; background: #1d110e; display: flex; pointer-events: none}
 body * {pointer-events: all; color: #1d110e}
@@ -55,11 +82,6 @@ small.sign {align-self: center; margin: 1.5vh !important; cursor: pointer; botto
                 #news div div h3 {width: auto; font-size: 14px; letter-spacing: -0.8px; font-weight: lighter}
                 #news div div p {line-height: 7px; font-size: 10px; margin-top: 10px; margin-bottom: 10px; font-family: "Bona Nova SC", serif; font-weight: bold}
 
-@media (max-height: 450px) {
-    #left h3 {display: none}
-    #news {margin-top: 11vh}
-}
-
 #main {width: 50%; background: #1d110e; z-index:-2; display: flex; flex-direction: column}
     #main > div {width: 100%; height: 50%}
     #context {width: 100%; height: 100%; position: absolute; left: 0; border: #423936}
@@ -88,31 +110,33 @@ small.sign {align-self: center; margin: 1.5vh !important; cursor: pointer; botto
             #webstats div > * {transition-property: background, color; transition-duration: 0.2s}
         #filehttp {color: white; padding-left: 2.5px; width: fit-content; white-space: nowrap; cursor: pointer; user-select: none}
 
-#middle {width: 15%; background: #024263}
-    #middle * {color: white; margin-left: 8%}
+#middle {width: 15%; background: #024263; overflow: scroll}
+    #middle * {color: white}
+        #middle > * {margin-left: 8%; margin-right: 8%}
     #middle h2 {margin-top: 8%; font-size: 2vw; text-transform: uppercase; letter-spacing: -1px; border-bottom: 1px solid #84807d; margin-right: 32%}
-    #middle p {font-family: "Bona Nova SC", serif; font-weight: bold; font-size: 10px; height: 12px; letter-spacing: 1px}
-    #middle canvas {aspect-ratio: 1; margin: 8%; width: 84%}
-
-@media (max-width: 950px) {
-    #right * {margin: 0 !important}
-}
-
-@media (max-width: 950px) {
-    #right * {margin: 0 !important}
-}
+    #middle canvas {aspect-ratio: 1; width: 84%}
+    #middle > p {font-family: "Bona Nova SC", serif; font-weight: bold; font-size: 10px; height: 12px; letter-spacing: 1px}
+    #middle > div {border-top: 1px solid #84807d; display: flex; align-items: baseline; flex-wrap: wrap}
+        #middle > div div {flex-shrink: 0}
+        #system > div {display: flex; align-items: center; margin-top: 6px}
+        #middle div p {font-family: "Arial"; line-height: 1.25vh; font-size: 1.25vh; white-space: pre-line; color: #84807d; display: flex}
+            #middle div p:before {height: 2.25vh; width: 2.25vh; margin-right: 5px; background: white; border-radius: 100%; content: ""}
 
 #right {width: 15%; background: #1d110e; overflow: auto}
-    #right * {margin: 15px; color: #84807d; flex-shrink: 0}
+    #right * {margin: 1.5vh; color: #84807d; flex-shrink: 0}
+    #version {width: 100%; display:flex; margin-bottom: 0; align-items: center}
+        #version * {margin: 0; white-space: nowrap}
+        #version div {margin: 5px !important; width: 40px; height: 40px; border-radius: 3px; flex: none; display: flex; justify-content: center; align-items: center; font-size: x-large; color: white; pointer-events: none; user-select: none; background: grey}
+        #version p {height: auto; font-size: small; max-width: 71%; white-space: pre-line}
     #notifications {max-height: 50%; height: auto; overflow: auto}
         #notifications * {margin: 0; white-space: nowrap}
         #notifications div {width: 100%; height: 55px; display:flex}
         #notifications div img {margin: 5px !important; width: 45px; border-radius: 3px; flex: none}
-        #notifications div div {margin: 5px !important; width: 45px; height: 45px; border-radius: 3px; flex: none; display: flex; justify-content: center; align-items: center; font-size: xx-large; color: white; pointer-events: none; user-select: none}
+        #notifications div div {margin: 5px !important; width: 45px; height: 45px; border-radius: 3px; flex: none; display: flex; justify-content: center; align-items: center; font-size: 26px; color: white; pointer-events: none; user-select: none}
         #notifications h3 {position: sticky; font-size: 10px; background: #302c2b; padding: 1px; padding-left: 12px; border-top: 0.8px solid #4f4c47}
         #notifications small {font-size: 11px; color: white}
         
-        #notifications div p{margin-top: 2px !important; margin-left: 20px !important; font-size: x-small; max-width: 71%; white-space: break-spaces}
+        #notifications div p{margin-top: 5px !important; margin-left: 20px !important; font-size: x-small; max-width: 71%; white-space: break-spaces}
         #notifications whitespace {display: block; background: #2e2a28; height: 2px; width: 100%}
 /* ↑ objects ↑ */
 

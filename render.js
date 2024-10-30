@@ -62,6 +62,9 @@ var interface = {
             })
         })
 
+        if (interface.focus) {
+            middle.children[0].innerText = interface.focus.name
+        }
         //todo: add system clicking
     },
 
@@ -151,6 +154,10 @@ var interface = {
         if (evt2){
             news.children[2].insertAdjacentHTML("beforeend",tmp[0] + evt2.link + tmp[1] + ((evt2.images.length > 0) ? "<img src='" + decodeURI(evt2.images[Math.randInt(0, evt2.images.length - 1)]) + "'>" : "") + tmp[2] + evt2.creation + tmp[3] + evt2.name + tmp[4] + evt2.commit + tmp[5])
         }
+    },
+
+    list:function() {
+
     },
 
     find:function(body, func, findDist = Infinity, x = 0, y = 0) {
@@ -261,8 +268,8 @@ var render = {
                 y = -(interface.focus.y) * interface.scale
             }
     
-            interface.offset.x += Math.round((x - interface.offset.x) * 0.08)
-            interface.offset.y += Math.round((y - interface.offset.y) * 0.08)
+            interface.offset.x += (x - interface.offset.x) * 0.08
+            interface.offset.y += (y - interface.offset.y) * 0.08
         }
         
         Object.keys(interface.systems).forEach(sun => {
@@ -312,12 +319,22 @@ var render = {
 
         render.context.info.reset()
 
+        render.context.info.fillStyle = "#e5e2db"
+        render.arc(render.middle.info.x, render.middle.info.y, render.middle.info.x / 1.5, 0 , 2 * Math.PI, true, false, render.context.info)
+
         render.context.info.fillStyle = "#ffffff40"
         render.arc(render.middle.info.x, render.middle.info.y, render.middle.info.x / 1.3, interface.rotate, interface.rotate + Math.PI / 2, true, true, render.context.info)
         render.arc(render.middle.info.x, render.middle.info.y, render.middle.info.x / 1.3, interface.rotate + Math.PI, interface.rotate + (3 * Math.PI) / 2, true, true, render.context.info)
 
         render.context.info.fillStyle = "white"
-        render.arc(render.middle.info.x, render.middle.info.y, render.middle.info.x / 1.5, 0 , 2 * Math.PI, true, false, render.context.info)
+        render.arc(render.middle.info.x, render.middle.info.y, render.middle.info.x / 1.8, 0 , 2 * Math.PI, true, false, render.context.info)
+
+        render.context.info.fillStyle = "#ddd4c7"
+        render.arc(render.middle.info.x, render.middle.info.y, render.middle.info.x / 4.5, 0 , 2 * Math.PI, true, false, render.context.info)
+
+        render.context.info.strokeStyle = "#a9a090"
+        render.arc(render.middle.info.x, render.middle.info.y, render.middle.info.x / 1.8, 0 , 2 * Math.PI, false, false, render.context.info)
+        render.arc(render.middle.info.x, render.middle.info.y, render.middle.info.x / 4.5, 0 , 2 * Math.PI, false, false, render.context.info)
 
         window.requestAnimationFrame(render.tick)
     }
@@ -332,8 +349,6 @@ window.onload = function() {
         interface.assemble(git)
         
         interface.randFocus()
-
-        render.tick()
     })
 
     http.get("https://script.google.com/macros/s/AKfycbzAjl6IyaJGFBmIliMVG9_7C_A2TXdfl9We38kzLJKzPmp93_7e-N29D55DUp_xXxl2/exec", function(alerts){
@@ -392,6 +407,8 @@ window.onload = function() {
     solar.onmouseout = function() {
         document.removeEventListener("wheel", interface.zoom)
     }
+
+    render.tick()
 }
 
 window.onresize = function(){
