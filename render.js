@@ -285,85 +285,85 @@ var interface = {
     },
 
     load: function() {
-        cookieManager.getCookie('settings')
-            .then(cookie => {
-                try {
-                    var json = JSON.parse(cookie)
-                    
-                    if (json) {
-                        console.group('Retrieved save for Gramweb.')
-                        console.info(json)
-                        console.groupEnd()
-    
-                        for (var setting in json) {
-                            switch (setting) {
-                                case 'motion':
-                                    if (!json.motion) {
-                                        motion.classList.add("active")
+        cookieManager.getCookie('settings').then(cookie => {
+            try {
+                var json = JSON.parse(cookie)
+                
+                if (json) {
+                    console.group('Retrieved save for Gramweb.')
+                    console.info(json)
+                    console.groupEnd()
 
-                                        interface.motion = json.motion
-                                    }
+                    for (var setting in json) {
+                        switch (setting) {
+                            case 'motion':
+                                if (!json.motion) {
+                                    motion.classList.add("active")
 
-                                    break
-    
-                                case 'cookies':
-                                    if (json.cookies) {
-                                        cookies.classList.add("active")
+                                    interface.motion = json.motion
+                                }
 
-                                        interface.cookies = json.cookies
-                                    }
+                                break
 
-                                    break
-    
-                                case 'autoFocus':
-                                    if (!json.autoFocus) {
-                                        autoFocus.classList.remove("active")
+                            case 'cookies':
+                                if (json.cookies) {
+                                    cookies.classList.add("active")
 
-                                        interface.autoFocus = json.autoFocus
-                                    }
+                                    interface.cookies = json.cookies
+                                }
 
-                                    break
+                                break
 
-                                case 'orbits':
-                                    if (!json.orbits) {
-                                        orbits.classList.remove("active")
+                            case 'autoFocus':
+                                if (!json.autoFocus) {
+                                    autoFocus.classList.remove("active")
 
-                                        interface.orbits = json.orbits
-                                    }
+                                    interface.autoFocus = json.autoFocus
+                                }
 
-                                    break
+                                break
 
-                                case 'newsFocus':
-                                    if (!json.autoFocus) {
-                                        newsFocus.classList.remove("active")
+                            case 'orbits':
+                                if (!json.orbits) {
+                                    orbits.classList.remove("active")
 
-                                        interface.newsFocus = json.newsFocus
-                                    }
+                                    interface.orbits = json.orbits
+                                }
 
-                                    break
+                                break
 
-                                case 'inspect':
-                                    if (!json.inspect) {
-                                        inspect.classList.remove("active")
-                                        interface.minimalize(interface.inspect)
+                            case 'newsFocus':
+                                if (!json.autoFocus) {
+                                    newsFocus.classList.remove("active")
 
-                                        interface.inspect = json.inspect
-                                    }
+                                    interface.newsFocus = json.newsFocus
+                                }
 
-                                    break
-    
-                                default:
-                                    console.warn("Unknown setting " + setting + " encountered.")
-                            }
+                                break
+
+                            case 'inspect':
+                                if (!json.inspect) {
+                                    inspect.classList.remove("active")
+                                    interface.minimalize(true)
+                                    
+                                    interface.inspect = json.inspect
+                                }
+
+                                break
+
+                            default:
+                                console.warn("Unknown setting " + setting + " encountered.")
                         }
-                    } else {
-                        console.info("%cError occurred or no save found for Gramweb.", "color: #a72e08")
                     }
-                } catch (error) {
-                    console.error("Failed to parse settings JSON:", error)
+                } else {
+                    console.info("%cError occurred or no save found for Gramweb.", "color: #a72e08")
                 }
-            })
-            .catch(function(error) { console.error("Failed to retrieve cookie:", error) })
+            } catch (error) {
+                console.error("Failed to parse settings JSON:", error)
+            }
+        }).catch(function(error) { 
+            console.error("Failed to retrieve cookie:", error) 
+        })
     }
 }
 

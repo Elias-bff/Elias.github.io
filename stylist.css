@@ -112,7 +112,7 @@ small.sign {align-self: center; margin: 1.5vh !important; cursor: pointer; botto
                 * {flex-shrink: 0; border-radius: 5px}
                 small {color: #7b7873}
             }
-            #explorer {
+            #explorer {display: grid;
                 * {color: var(--dark-accent)}
                 #lines {padding-left: 5px; font-size: x-small; flex: none; padding-right: 5px; border-right: 0.5px solid var(--border); text-align: right; background: var(--background)}
                 #code {padding-left: 5px; font-size: x-small; white-space: preserve; overflow: scroll; text-wrap: nowrap}
