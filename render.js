@@ -344,7 +344,7 @@ var interface = {
                             case 'inspect':
                                 if (!json.inspect) {
                                     inspect.classList.remove("active")
-                                    interface.minimalize(true)
+                                    interface.minimalize(false)
                                     
                                     interface.inspect = json.inspect
                                 }
