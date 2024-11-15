@@ -249,17 +249,17 @@ var interface = {
 
     minimalize:function(bool) {
         if (bool) {
-            left.style.width = "22%"
-            main.style.width = "61%"
-            middle.style.display = "none"
-            right.style.width = "17%"
-            right.style.borderLeft = "2px solid var(--border)"
-        } else {
             left.style.width = "20%"
             main.style.width = "50%"
             middle.style.display = "block"
             right.style.width = "15%"
             right.style.borderLeft = "none"
+        } else {
+            left.style.width = "22%"
+            main.style.width = "61%"
+            middle.style.display = "none"
+            right.style.width = "17%"
+            right.style.borderLeft = "2px solid var(--border)"
         }
     },
 
