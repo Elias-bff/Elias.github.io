@@ -32,8 +32,11 @@
     #main {width: 70% !important}
         #solar {height: 100% !important}
         #list {display: none !important}
-    #middle {   bottom: 0; position: absolute; height: 33% !important; width: 30% !important}
-    #right {display: none !important}
+    #middle {display: none !important}
+    #right {bottom: 0; position: absolute; height: 33% !important; width: 30% !important;
+        > *:not(#notifications) {display: none !important}
+        #notifications {height: 100% !important; max-height: unset !important; border-right: 2px solid var(--border)}
+    }
     #overlay {clip-path: polygon(28% 0, 100% 0, 100% 100%, 28% 100%) !important}
 }
 
@@ -70,7 +73,7 @@ small.sign {align-self: center; margin: 1.5vh !important; cursor: pointer; botto
     * {overflow: visible; font-family: "Anton SC", sans-serif; margin: 8%;
         * {margin: 0}
     }
-    h3 {letter-spacing: 1px; width: 84%; border-top: 1px solid var(--dark-accent); border-bottom: 1px solid var(--dark-accent); line-height: 73%; text-wrap: nowrap}
+    h3 {letter-spacing: 1px; width: 84%; border-top: 1px solid var(--dark-accent); border-bottom: 1px solid var(--dark-accent); line-height: 78%; text-wrap: nowrap; height: 2%}
     h1 {text-shadow:
         0.8px 0.8px 0 var(--background),
         -0.8px 0.8px 0 var(--background),
@@ -112,7 +115,7 @@ small.sign {align-self: center; margin: 1.5vh !important; cursor: pointer; botto
                 * {flex-shrink: 0; border-radius: 5px}
                 small {color: #7b7873}
             }
-            #explorer {display: grid;
+            #explorer {
                 * {color: var(--dark-accent)}
                 #lines {padding-left: 5px; font-size: x-small; flex: none; padding-right: 5px; border-right: 0.5px solid var(--border); text-align: right; background: var(--background)}
                 #code {padding-left: 5px; font-size: x-small; white-space: preserve; overflow: scroll; text-wrap: nowrap}
@@ -171,7 +174,7 @@ small.sign {align-self: center; margin: 1.5vh !important; cursor: pointer; botto
         }
 }
 
-#right {width: 15%; background: var(--background); overflow: auto;
+#right {width: 15%; background: var(--background); overflow: auto; z-index: 3;
     * {margin: 1.5vh; color: var(--dark-accent); flex-shrink: 0}
     #version {width: 100%; display:flex; margin-bottom: 0; align-items: center;
         * {margin: 0; white-space: nowrap}

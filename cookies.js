@@ -10,7 +10,7 @@ var cookieUtils = {
         var str = atob(value)
         var array = Uint8Array.from(str, char => char.charCodeAt(0))
         var decode = new TextDecoder().decode(array)
-        // ↑ decodes base64 to binary, converts to array, and decodes utf 8 bytes to string
+        // ↑ decodes base64 to binary, converts to array, and decodes utf 8 bytes to string ↑
 
         return decode
     }

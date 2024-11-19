@@ -11,6 +11,10 @@ Math.randInt = function(min, max) {
 
     return Math.floor(Math.random() * (floor - ceil) + ceil)
 }
+
+Math.randFloat = function(min, max) {
+    return Math.random() * (max - min) + min
+}
   
 Math.norm = function(value) {
     return value >= 0 ? 1 : -1
@@ -22,6 +26,7 @@ Math.clamp = function(max, min, value) {
 
 Math.normVec = function(x, y) {
     var length = Math.sqrt(x*x+y*y)
+
     return {
         x: x/length, 
         y: y/length 
